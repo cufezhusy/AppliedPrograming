@@ -17,12 +17,12 @@ int main(int argc, char* argv[])
 	//std::cout << "x = " << x << " and y = " << y << "\n";
 
   // 2.6 double newton_Raphson(double initialGuess, double epsilon);
-  double newton = newton_Raphson(0,  0.000001);
-  std::cout << newton <<"\n";
+  //double newton = newton_Raphson(0,  0.000001);
+  //std::cout << newton <<"\n";
 
   // 3.3
-  // std::cout << "euler\n";
-  // implicit_Euler(n);
+  std::cout << "euler\n";
+  implicit_Euler(100);
 
   // 5.3
   // pointerfun();

@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
   Multiply(res_case1,scalar,B,BRows,BCols);
   std:: cout << "Result = " << "\n";
   PrintMatrix(res_case1,BRows,BCols);
-  FreeMatrixMemory(BRows,B);
+  FreeMatrixMemory(BRows,res_case1);
 
    // Test case 2: matrix * vector
    std:: cout << "========== test case 2 ========== \n";
@@ -141,13 +141,15 @@ int main(int argc, char* argv[])
    Multiply(res_case2,A,b_vector,ARows,ACols,BRows);
    std:: cout << "Result = " << "\n";
    PrintVector(res_case2,ARows);
+   delete [] res_case2;
 
-  // Test case 4: matrix * matrix
+  // Test case 3: vector * matrix
   std:: cout << "========== test case 3 ========== \n";
   double* res_case3 = new double [BCols];
-  Multiply(res_case3,A[0],B,ACols,BRows,BCols);
+  Multiply(res_case3,A[1],B,ACols,BRows,BCols);
   std:: cout << "Result = " << "\n";
   PrintVector(res_case3,BCols);
+  delete [] res_case3;
 
   // Test case 4: matrix * matrix
   std:: cout << "========== test case 4 ========== \n";
@@ -155,5 +157,9 @@ int main(int argc, char* argv[])
   Multiply(res_case4,A,B,ARows,ACols,BRows,BCols);
   std:: cout << "Result = " << "\n";
   PrintMatrix(res_case4,ARows,BCols);
+
+  FreeMatrixMemory(ARows,A);
+  FreeMatrixMemory(BRows,B);
+  FreeMatrixMemory(ARows,res_case4);
   return 0;
 }

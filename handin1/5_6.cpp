@@ -3,6 +3,7 @@
 
 #include <cassert>
 
+
 void Multiply(double *res, double *A, double **B, int ACols, int BRows, int BCols)
 {
     assert (ACols == BRows);
@@ -18,16 +19,21 @@ void Multiply(double *res, double *A, double **B, int ACols, int BRows, int BCol
     }
 }
 
-
 void Multiply(double **res, double **A, double **B, int ARows, int ACols, int BRows, int BCols)
 {
     assert (ACols == BRows);
+    double temp_sum;
     for (int i =0; i< ARows; i ++)
     {
-        double * temp_res = new double[ACols];
-        Multiply(temp_res,A[i],B,ACols,BRows,BCols);
-        res[i] = temp_res;
-        delete [] temp_res;
+       for (int ii = 0; ii< BCols; ii ++)
+        {
+            temp_sum = 0.0;
+            for (int j=0; j<ACols; j++)
+            {
+                temp_sum += A[i][j] * B[j][ii];
+            }
+        res[i][ii] = temp_sum;
+        }
     }
 }
 

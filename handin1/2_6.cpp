@@ -3,15 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-double f(double x)
-{
-    return exp(x) + pow(x,3) -5;
-}
-
-double df(double x)
-{
-    return exp(x) + 3 * pow(x,2);
-}
+double f(double x);
+double df(double x);
 
 
 double newton_Raphson(double initialGuess, double epsilon)
@@ -24,6 +17,16 @@ double newton_Raphson(double initialGuess, double epsilon)
     }
     while (abs(dx)>epsilon);
     return x;
+}
+
+double f(double x)
+{
+    return exp(x) + pow(x,3) -5;
+}
+
+double df(double x)
+{
+    return exp(x) + 3 * pow(x,2);
 }
 
 

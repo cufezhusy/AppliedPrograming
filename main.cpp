@@ -6,8 +6,8 @@
 
 //#include "./handin1/2_6.h"
 //#include "./handin1/3_3.h"
-#include "./handin1/5_3.h"
-//#include "./handin1/5_4.h"
+//#include "./handin1/5_3.h"
+#include "./handin1/5_4.h"
 //#include "./handin1/5_6.h"
 //#include "./handin1/5_9.h"
 //#include "./handin1/5_10.h"
@@ -27,14 +27,19 @@ int main(int argc, char* argv[])
   //implicit_Euler(100);
 
   // 5.3
-  double a = 3, b =2;
-  std::cout << "a = " << a << " and b = " << b << "\n";
-  swap_ref(a,b);
-  std::cout << "a = " << a << " and b = " << b << "\n";
+  //double a = 3, b =2;
+  //std::cout << "a = " << a << " and b = " << b << "\n";
+  //swap_ref(a,b);
+  //std::cout << "a = " << a << " and b = " << b << "\n";
 
   // pointerfun();
   
   // 5.4
+  double* A = new double [5];
+  A[0] =3; A[1]=2;A[2]=4;A[3]=3;A[4]=6;
+  std::cout << "mean = " << calc_mean(A,5) << "\n";
+  std::cout << "std = " << calc_std(A,5);
+  delete [] A;
   // mean();
 
   // 5.6 Multiply matrix and vectors

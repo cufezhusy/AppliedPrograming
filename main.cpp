@@ -38,8 +38,14 @@ int main(int argc, char* argv[])
   double* A = new double [5];
   A[0] =3; A[1]=2;A[2]=4;A[3]=3;A[4]=6;
   std::cout << "mean = " << calc_mean(A,5) << "\n";
-  std::cout << "std = " << calc_std(A,5);
+  std::cout << "std = " << calc_std(A,5) << "\n";
   delete [] A;
+
+  double* B = new double [1];
+  B[0] =3;
+  std::cout << "mean = " << calc_mean(B,1) << "\n";
+  std::cout << "std = " << calc_std(B,1) << "\n";
+  delete [] B;
   // mean();
 
   // 5.6 Multiply matrix and vectors

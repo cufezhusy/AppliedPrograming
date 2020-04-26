@@ -33,7 +33,7 @@ void AssignRandomValueToMatrix(double **matrix, int numRows, int numCols)
   {
     for (int j=0; j<numCols; j++)
     {
-      matrix[i][j] = rand() % 100;
+      matrix[i][j] = rand() % 10;
     }
   }
 }
@@ -48,6 +48,15 @@ void PrintMatrix(double **matrix, int numRows, int numCols)
     }
     std:: cout << "\n";
   }
+}
+
+void PrintVector(double *vector, int numRows)
+{
+  for (int i=0 ; i<numRows; i++)
+  {
+    std:: cout << vector[i] << " ";
+  }
+  std:: cout << "\n";
 }
 
 void FreeMatrixMemory (int numRows, double ** matrix)
@@ -97,17 +106,54 @@ int main(int argc, char* argv[])
   // 5.6 Multiply matrix and vectors
   // ...
 
-  // Test case 1: scale * matrix
+
   double scalar = 10;
-  int BRows = 2 ; int BCols =3;
+  int ARows = 3 ; int ACols = 4;
+  double **A = AllocateMatrixMemory(ARows,ACols);
+  AssignRandomValueToMatrix(A,ARows,ACols);
+  std:: cout << "A = " << "\n";
+  PrintMatrix(A,ARows,ACols);
+  int BRows = 4 ; int BCols =3;
   double **B = AllocateMatrixMemory(BRows,BCols);
-  double **res = AllocateMatrixMemory(BRows,BCols);
   AssignRandomValueToMatrix(B,BRows,BCols);
   std:: cout << "B = " << "\n";
   PrintMatrix(B,BRows,BCols);
-  Multiply(res,scalar,B,BRows,BCols);
+
+  // Test case 1: scale * matrix
+  std:: cout << "========== test case 1 ========== \n";
+  double **res_case1 = AllocateMatrixMemory(BRows,BCols);
+  
+  Multiply(res_case1,scalar,B,BRows,BCols);
   std:: cout << "Result = " << "\n";
-  PrintMatrix(res,BRows,BCols);
+  PrintMatrix(res_case1,BRows,BCols);
   FreeMatrixMemory(BRows,B);
+
+   // Test case 2: matrix * vector
+   std:: cout << "========== test case 2 ========== \n";
+   double* res_case2 = new double [ARows];
+   double* b_vector = new double [BRows];
+   for (int j = 0; j < BRows; j++)
+   {
+     b_vector[j] = B[j][0];
+   }
+   std:: cout << "b_vector = " << "\n";
+   PrintVector(b_vector,BRows);
+   Multiply(res_case2,A,b_vector,ARows,ACols,BRows);
+   std:: cout << "Result = " << "\n";
+   PrintVector(res_case2,ARows);
+
+  // Test case 4: matrix * matrix
+  std:: cout << "========== test case 3 ========== \n";
+  double* res_case3 = new double [BCols];
+  Multiply(res_case3,A[0],B,ACols,BRows,BCols);
+  std:: cout << "Result = " << "\n";
+  PrintVector(res_case3,BCols);
+
+  // Test case 4: matrix * matrix
+  std:: cout << "========== test case 4 ========== \n";
+  double** res_case4 = AllocateMatrixMemory(ARows,BCols);
+  Multiply(res_case4,A,B,ARows,ACols,BRows,BCols);
+  std:: cout << "Result = " << "\n";
+  PrintMatrix(res_case4,ARows,BCols);
   return 0;
 }

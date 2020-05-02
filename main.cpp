@@ -9,8 +9,8 @@
 //#include "./handin1/5_3.h"
 //#include "./handin1/5_4.h"
 //#include "./handin1/5_6.h"
-#include "./handin1/5_9.h"
-//#include "./handin1/5_10.h"
+//#include "./handin1/5_9.h"
+#include "./handin1/5_10.h"
 //#include "./demo/example_5_1.h"
 
 int main(int argc, char* argv[])
@@ -26,13 +26,11 @@ int main(int argc, char* argv[])
   b[0] = 11; b[1] =3; b[2] =4; 
 
   double* u = new double [3];
-  solve3by3(A,b,u);
-  std::cout << "Found solution \n"; 
-  for (int i =0; i<3; i++)
+  guassian_elimination(A,b,u,3);
+  for (int i = 0; i <3 ; i++)
   {
-    std::cout << u[i] << " ";
+    std:: cout << u[i] << " ";
   }
-
   std::getchar();
   return 0;
 }

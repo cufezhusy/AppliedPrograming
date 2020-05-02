@@ -50,8 +50,6 @@ void Multiply(double *res, double **A, double *B, int ARows, int ACols, int BRow
         }
         res[i] = temp_sum;
     }
-
-
 }
 
 void Multiply(double **res, double scalar, double **B, int BRows, int BCols)

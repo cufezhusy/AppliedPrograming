@@ -2,6 +2,7 @@
 #define H_5_10_H
 #include <iostream>
 #include <cassert>
+#include "5_6.cpp"
 double determinant2D(double **A);
 int start_index(int a);
 int end_index(int a);
@@ -11,8 +12,6 @@ void PrintMatrix(double **matrix, int numRows, int numCols);
 double** calculateADet(double **A);
 double** cofactorsMatrix(double **matrix);
 double** adjointMatrix(double **matrix);
-void Multiply(double **res, double scalar, double **B, int BRows, int BCols) ;
-void Multiply(double *res, double **A, double *B, int ARows, int ACols, int BRows);
 
 void solve3by3(double **A, double *b, double *u)
 {   
@@ -172,33 +171,4 @@ void PrintMatrix(double **matrix, int numRows, int numCols)
     std:: cout << "\n";
   }
 }
-
-
-void Multiply(double **res, double scalar, double **B, int BRows, int BCols)
-{
-    for (int i = 0; i< BRows; i ++)
-   {
-       for (int j = 0; j< BCols; j ++)
-       {
-           res[i][j] = scalar * B[i][j];
-       }
-   }
-}
-
-
-void Multiply(double *res, double **A, double *B, int ARows, int ACols, int BRows)
-{
-    assert (ACols == BRows);
-    double temp_sum;
-    for (int i = 0; i< ARows; i ++)
-    {
-        temp_sum = 0.0;
-        for (int j=0; j<ACols; j++)
-        {
-            temp_sum += A[i][j] * B[j];
-        }
-        res[i] = temp_sum;
-    }
-}
-
 #endif

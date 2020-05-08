@@ -13,6 +13,19 @@ ComplexNumber::ComplexNumber(double x, double y)
     mImaginaryPart = y;
 }
 
+ComplexNumber::ComplexNumber(const ComplexNumber& z)
+{
+    mRealPart = z.mRealPart;
+    mImaginaryPart = z.mImaginaryPart;
+}
+
+ComplexNumber::ComplexNumber(double real)
+{
+    mRealPart = real;
+    mImaginaryPart = 0.0;
+}
+
+
 double ComplexNumber:: CalculateModulus() const
 {
     return sqrt(mRealPart * mRealPart + mImaginaryPart * mImaginaryPart);
@@ -79,4 +92,41 @@ std::ostream& operator<<(std::ostream& output,const ComplexNumber& z)
     }
     
     return output;
+}
+
+double ComplexNumber:: GetRealPart() const
+{
+    return mRealPart;
+}
+
+double ComplexNumber:: GetImaginaryPart() const
+{
+    return mImaginaryPart;
+}
+
+double RealPart(const ComplexNumber& z)
+{
+    return z.mRealPart;
+}
+
+double ImaginaryPart(const ComplexNumber& z)
+{
+    return z.mImaginaryPart;
+}
+
+ComplexNumber ComplexNumber:: CalculateConjugate() const
+{
+    return ComplexNumber(mRealPart,-mImaginaryPart);
+}
+
+void ComplexNumber:: SetConjugate()
+{
+    mImaginaryPart = -mImaginaryPart;
+}
+
+
+ComplexNumber ComplexNumber:: operator*(const ComplexNumber&z) const
+{
+    return ComplexNumber(mRealPart*z.mRealPart -mImaginaryPart*z.mImaginaryPart,
+                         mImaginaryPart*z.mRealPart + mRealPart*z.mImaginaryPart);
 }

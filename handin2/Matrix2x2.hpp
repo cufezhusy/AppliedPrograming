@@ -2,7 +2,7 @@
 #define SUBMISSION_MATRIX2X2_HPP_
 
 #include <iostream>
-
+#include <cassert>
 class Matrix2x2 {
 	private:
 		double val00; // first row, first column

@@ -14,8 +14,11 @@ double newton_Raphson(double initialGuess, double epsilon)
     do {
         dx = f(x) /df(x);
         x = x- dx;
+        std:: cout <<  "x =" << x << " , dx=" << dx << "\n";
     }
     while (abs(dx)>epsilon);
+    
+    std:: cout <<  "x =" << x << " , f(x)=" << f(x) << "\n";
     return x;
 }
 

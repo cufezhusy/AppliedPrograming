@@ -60,6 +60,7 @@ void guassian_elimination(double **A, double *b, double *u, int n)
     FreeMatrixMemory(n, P);
     FreeMatrixMemory(n, M);
     FreeMatrixMemory(n, Ak);
+    delete [] bk;
 }
 
 

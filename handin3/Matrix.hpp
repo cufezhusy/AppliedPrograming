@@ -6,25 +6,14 @@ template <class T>
 class Matrix
 {
 private:
-	T** mData; // entries of matrix
+	std::vector<T> mData; // entries of matrix
 	int mNumRows, mNumCols; // dimensions
 public:
-	Matrix(const Matrix& otherMatrix)
+	Matrix(const Matrix<T>& otherMatrix)
 	{
 		mNumRows = otherMatrix.mNumRows;
 		mNumCols = otherMatrix.mNumCols;
-		mData = new T* [mNumRows];
-		for (int i=0; i<mNumRows; i++)
-		{
-			mData[i] = new double [mNumCols];
-		}
-		for (int i=0; i<mNumRows; i++)
-		{
-			for (int j=0; j<mNumCols; j++)
-			{
-				mData[i][j] = otherMatrix.mData[i][j];
-			}
-		}
+		mData = otherMatrix.mData;
 	}
 	
 	Matrix(int numRows, int numCols)
@@ -33,27 +22,16 @@ public:
 		assert(numCols > 0);
 		mNumRows = numRows;
 		mNumCols = numCols;
-		mData = new T* [mNumRows];
-		for (int i=0; i<mNumRows; i++)
-		{
-			mData[i] = new double [mNumCols];
-		}
-		for (int i=0; i<mNumRows; i++)
-		{
-			for (int j=0; j<mNumCols; j++)
-			{
-				mData[i][j] = 0.0;
-			}
-		}
+		mData.resize(numRows * mNumCols);
 	}
 
-	~Matrix()
+	T at(int i, int j)
 	{
-		for (int i=0; i<mNumRows; i++)
-		{
-			delete[] mData[i];
-		}
-		delete[] mData;
+		assert(i >= 0);
+		assert(i < mNumRows);
+		assert(j >= 0);
+		assert(j < mNumCols);
+		return mData[i * mNumCols + j];
 	}
 	
 	int GetNumberOfRows() const
@@ -71,7 +49,7 @@ public:
 		assert(i < mNumRows);
 		assert(j >= 0);
 		assert(j < mNumCols);
-		return mData[i][j];
+		return mData[i * mNumCols + j];
 	}
 
 	T const& operator()(int i, int j)const
@@ -80,7 +58,7 @@ public:
 		assert(i < mNumRows);
 		assert(j >= 0);
 		assert(j < mNumCols);
-		return mData[i][j];
+		return mData[i * mNumCols + j];
 	}
 
 	//overloaded assignment operator
@@ -88,14 +66,7 @@ public:
 	{
 		assert(mNumRows = otherMatrix.mNumRows);
 		assert(mNumCols = otherMatrix.mNumCols);
-
-		for (int i=0; i<mNumRows; i++)
-		{
-			for (int j=0; j<mNumCols; j++)
-			{
-				mData[i][j] = otherMatrix.mData[i][j];
-			}
-		}
+		mData = otherMatrix.mData;
 		return *this;
 	}
 
@@ -106,7 +77,7 @@ public:
 		{
 			for (int j=0; j<mNumCols; j++)
 			{
-				mat(i,j) = -mData[i][j];
+				mat(i,j) = -mData[i * mNumCols + j];
 			}
 		}
 		return mat;
@@ -121,7 +92,7 @@ public:
 		{
 			for (int j=0; j<mNumCols; j++)
 			{
-				mat(i,j) = mData[i][j] + m1.mData[i][j];
+				mat(i,j) = mData[i * mNumCols + j] + m1(i,j);
 			}
 		}
 		return mat;
@@ -136,7 +107,7 @@ public:
    		{
       		for (int j=0; j<mNumCols; j++)
       		{
-         		mat(i,j) = mData[i][j] - m1.mData[i][j];
+         		mat(i,j) = mData[i * mNumCols + j] - m1(i,j);
       		}
    		}
    		return mat;
@@ -149,12 +120,24 @@ public:
    		{
       		for (int j=0; j<mNumCols; j++)
       		{
-         		mat(i,j) = a*mData[i][j];
+         		mat(i,j) = mData[i * mNumCols + j];
       		}
    		}
    		return mat;
 	}
 
+	void Print() const
+	{
+   		Matrix mat(mNumRows, mNumCols);
+   		for (int i=0; i<mNumRows; i++)
+   		{
+      		for (int j=0; j<mNumCols; j++)
+      		{
+         		std::cout << mData[i * mNumCols + j] << ",";
+      		}
+			std::cout << "\n";
+   		}
+	}
 };
 
 

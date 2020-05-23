@@ -1,37 +1,39 @@
 #include <iostream>
 #include <sstream>
 #include <ctime>
-#include "./handin3/Vector.hpp"
-#include "./handin3/Matrix.hpp"
+//#include "./handin3/Vector.hpp"
+//#include "./handin3/Matrix.hpp"
+#include "./handin3/SparseVector.hpp"
 
 int main(int argc, char* argv[])
 
 {   
-    std::cout << "-----test for vector ----" << "\n";
-    Vector<double> s = Vector<double>(10);
-    Vector<double> d = Vector<double>(s);
-    s.Print();
-    s[3] = 2.0;
-    d[4] = 3.0;
-    Vector<double> e = s + d;
-    e.Print();
-    std::cout << e.CalculateNorm() << "\n";
-
-    std::cout << "-----test for matrix ----" << "\n";
-    Matrix<double> A = Matrix<double>(4,3);
-    A(0,0) = 3.2;
-    A(1,0) = 5.4;
-    A(3,2) = 9.9;
-    std::cout << "A =" << "\n";
-    A.Print();
-    Matrix<double> B = Matrix<double>(4,3);
-    B(0,0) = 5;
-    std::cout << "B =" << "\n";
-    B.Print();
-    Matrix<double> C = A + B;
-    std::cout << "C =" << "\n";
-    C.Print();
+    std::cout << "-----test start ----" << "\n";
+    SparseVector<double> empty_vector = SparseVector<double> ();
+    SparseVector<double> a = SparseVector<double> (1000);
+    a.setValue(12, 3.2);
+    a.setValue(6, 4);
+    a.setValue(30, 71);
+    a.setValue(12, 9.3);
+    a.Print();
+    std::cout << "A_10 = " << a.getValue(10) << '\n';
+    std::cout << "A_12 = " << a.getValue(12) << '\n';
+    std::cout << "A_30 = " << a.getValue(30) << '\n';
+    std::cout << "no of non zero eleemnts in A  = " << a.nonZeroes() << '\n';
+    std::cout << "Index of 2nd elements  = " << a.indexNonZero(2) << '\n';
+    std::cout << "Value of 2nd elements  = " << a.valueNonZero(2) << '\n';
+    SparseVector<double> b = SparseVector<double> (1000);
+    b.setValue(12,99.0);
+    b.setValue(392,12.3);
+    b.setValue(1,17.0);
+    std::cout << "b=" << "\n";
+    b.Print();
+    a+=b;
+    std::cout << "a=" << "\n";
+    a.Print();
+    a-=b;
+    std::cout << "a=" << "\n";
+    a.Print();
     std::getchar();
-    
     return 0;
 }

@@ -11,6 +11,12 @@ private:
 	int mSize; // size of vector
 public:
 
+	std::vector<T> const&getStorage()
+	{
+		return mData;
+	}
+
+
 	Vector (const Vector <T> & otherVector)
 	{
 		mSize = otherVector.size();
@@ -19,9 +25,15 @@ public:
 
 	Vector (int size)
 	{
-		assert(size > 0);
+		assert(size >= 0);
 		mSize = size;
 		mData.resize(size);
+	}
+
+	Vector ()
+	{
+		mSize = 0;
+		mData.resize(0);
 	}
 
 	int size() const
@@ -85,7 +97,7 @@ public:
 	}
 
 	// scalar multiplication
-	Vector operator*(double a) const
+	Vector operator*(T a) const
 	{
 		Vector v(mSize);
 		for (int i=0; i<mSize; i++)

@@ -28,7 +28,7 @@ void Student:: SetLibraryFines(double amount)
     }
     else
     {
-        throw Exception("Student","Libary fines can not be negative!");
+        std:: cout << "Tution fee cannot be negative";
     }
     
 }

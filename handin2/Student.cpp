@@ -1,5 +1,5 @@
 # include "Student.hpp"
-
+# include "Exception.hpp"
 Student :: Student()
 {
     name = "Unknown";
@@ -21,9 +21,16 @@ double Student :: MoneyOwed() const
 }
 
 void Student:: SetLibraryFines(double amount)
-{
-    assert(amount>=0);
-    library_fines = amount;
+{   
+    if (amount>=0.0) 
+    {
+        library_fines = amount;
+    }
+    else
+    {
+        throw Exception("Student","Libary fines can not be negative!");
+    }
+    
 }
 
 double Student:: GetLibraryFines() const

@@ -2,6 +2,7 @@
 #define EXCEPTIONDEF
 
 #include <string>
+
 class Exception	{
 	private:
 		std::string mTag, mProblem;

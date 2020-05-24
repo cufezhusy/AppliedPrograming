@@ -160,22 +160,63 @@ public:
 
 // computes z= x+y, equivalent to z=x, z+=y
 template<class T>
-SparseVector<T> operator+(SparseVector<T> const& x, SparseVector<T> const& y);
+SparseVector<T> operator+(SparseVector<T> const& x, SparseVector<T> const& y)
+{
+	SparseVector <T> z = x;
+	z+=y;
+	return z;
+}
 
 // computes z= x-y, equivalent to z=x, z-=y
 template<class T>
-SparseVector<T> operator-(SparseVector<T> const& x, SparseVector<T> const& y);
+SparseVector<T> operator-(SparseVector<T> const& x, SparseVector<T> const& y)
+{
+	SparseVector <T> z = x;
+	z-=y;
+	return z;
+}
 
 
 // computes the matrix-vector product of a dense matrix and sparse vector z=Ax.
 // The result is a dense vector.
 template<class T>
-Vector<T> operator* (Matrix<T> const& A, SparseVector<T> const& x);
+Vector<T> operator* (Matrix<T> const& A, SparseVector<T> const& x)
+{
+	unsigned int original_vector_size = x.size();
+	assert(A.GetNumberOfColumns() ==(int) original_vector_size);
+	int new_vector_length = A.GetNumberOfRows();
+	Vector<T> new_vector(new_vector_length);
+
+	for (int i=0; i<new_vector_length; i++)
+	{
+		for (int j=0; j<original_vector_size; j++)
+		{
+			new_vector[i] += A(i,j)*x.getValue(j);
+		}
+	}
+	return new_vector;
+}
 
 // computes the matrix-vector product of a dense matrix and sparse vector z=x^TA.
 // The result is a dense vector.
 template<class T>
-Vector<T> operator* (SparseVector<T> const& x, Matrix<T> const& A);
+Vector<T> operator* (SparseVector<T> const& x, Matrix<T> const& A)
+{
+	unsigned int original_vector_size = x.size();
+	assert(A.GetNumberOfRows() == (int) original_vector_size);
+	int new_vector_length = A.GetNumberOfColumns();
+	Vector<T> new_vector(new_vector_length);
+
+	for (int i=0; i<new_vector_length; i++)
+	{
+		for (int j=0; j<original_vector_size; j++)
+		{
+			new_vector[i] += x.getValue(j)*A(j,i);
+		}
+	}
+
+	return new_vector;
+}
 
 
 #endif

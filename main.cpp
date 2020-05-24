@@ -34,6 +34,27 @@ int main(int argc, char* argv[])
     a-=b;
     std::cout << "a=" << "\n";
     a.Print();
+    SparseVector<double> c = a + b;
+    std::cout << "c= a+b = " << "\n";
+    c.Print();
+    SparseVector<double> d = a - b;
+    std::cout << "d= a-b = " << "\n";
+    d.Print();
+
+    SparseVector<double> e = SparseVector<double> (3);
+    e.setValue(0,3);
+    e.setValue(2,5);
+    Matrix<double> A = Matrix<double> (3,3);
+    A(0,0) = 1; A(0,1) = 0; A(0,2) = 0;
+    A(1,0) = 0; A(1,1) = 1; A(1,2) = 0; 
+    A(2,0) = 0; A(2,1) = 0; A(2,2) = 1;
+    Vector<double> y = A * e;
+    std::cout << " y = A*e = " << "\n";
+    y.Print(); 
+
+    Vector<double> y2 = e * A;
+    std::cout << " y2 = e*A = " << "\n";
+    y2.Print(); 
     std::getchar();
     return 0;
 }

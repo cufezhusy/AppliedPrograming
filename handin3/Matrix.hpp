@@ -2,6 +2,7 @@
 #define MATRIXHEADERDEF
 #include "Vector.hpp"
 
+#include<iostream>
 template <class T>
 class Matrix
 {

@@ -7,6 +7,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <iostream>
 
 template<class T>
 class SparseVector{

@@ -19,7 +19,8 @@ int main(int argc, char* argv[])
     Vector<double> e = s + d;
     e.Print();
     std::cout << e.CalculateNorm() << "\n";
-
+    Vector<double> k = - e;
+    k.Print();
     std::vector<double> s_data = s.getStorage();
     Vector<int> t = Vector<int>(20);
     std::cout << "-----test for matrix ----" << "\n";

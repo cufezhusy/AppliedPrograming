@@ -2,6 +2,8 @@
 #define VECTORHEADERDEF
 #include <cassert>
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 template <class T>
 class Vector
@@ -67,7 +69,7 @@ public:
 	Vector operator-() const // unary -
 	{
 		Vector<T> v(mSize);
-		for (int n: mData)
+		for (int i=0; i<mSize; i++)
 		{
 			v[i] = -mData[i];
 		}
